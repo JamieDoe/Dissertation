@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    height: auto;
+    margin: auto;
+    padding: auto;
+}
+
+body {
+    background-color: oldlace;
+    
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+}
+
+.pageContainer {
+    padding-bottom: 5rem;
+}
+
+.navigator {
+    height: 5rem;
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+    background-color: grey;
+}

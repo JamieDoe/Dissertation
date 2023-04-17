@@ -1,7 +1,7 @@
 {
   "name": "dissertation",
   "version": "1.0.0",
-  "description": "Final Year dissertation. Application built for experement.",
+  "description": "Final Year dissertation. Application built for experiment.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/UP953068/Dissertation#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "connect": "^3.7.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.14.0",
+    "serve-static": "^1.15.0"
   }
 }

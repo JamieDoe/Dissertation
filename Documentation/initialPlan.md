@@ -1,7 +1,9 @@
 # Design & Project Documentation
 
-## 1 Initial Plan
+## Initial Plan
+
 ### 1.1 Problem description
+
 #### What is the problem that should be solved?
 
 What is the best design methodology for a solo software engineer?
@@ -159,8 +161,6 @@ All people who go to the gym, weather due to poor form or pushing it too far, wi
 
 The British National Health Service (NHS) provides physiotherapy to people whom require rehabilitation from injuries, or for injury prevention. With the NHS already overwhelmed with backlogged appointments and massive underfunding, [ ] could help put a dent in alleviating strain on the NHS.
 
-*Add More To This Section*
-
 #### Closest competitors/rivals/similar products
 
 In order for SmartStretch to succeed, we must look at the closest competitors that will cause competition to ensure that StrechSmart can have a unique place in the market.
@@ -227,8 +227,6 @@ Application is aimed at both sexes and all ages.
 * This is a link to the [Google Form](link)
 
 #### Challenges faced during the eliciting requirements period
-
-
 
 ```markdown
 * There were a few challenges faced during different phases of the elicitation period. One of them being the availablity of the stakeholders to conduct the interview, which we eventually overcame.
@@ -327,7 +325,7 @@ StretchSmart is an all-inclusive app meaning we aim to cater to all technical & 
 An application should load as fast as possible, the ideal application load time should be 1-2 seconds. A recent study by Shaun Anderson (over 20 years experience in SEO and web-dev) found that 53% of mobile users abandon a website if it takes more than 3 seconds to load. Due to this it is important that SmartStretch maintains performance levels adequate to retain user engagement.
 Unfortunately, as stated in the later [System properties & constraints](#system-properties--constraints) section, performance will partly be dependant on a users network stability.
 
-1. **Security:**
+4. **Security:**
 The security of user data is the most important requirement StretchSmart will abide by. To ensure that user information is secure, third party authentication via Auth0 will be utilised. This means that the users passwords are not stored locally and are encrypted via google authentication. This process also eliminates the possibility of a 'robot' user, further securing website against malicious attacks.
 All SQL queries will also be sanitised to ensure attacks of the database aren't possible. The application will operate with HTTPS encryption, adding another layer of security between server and application.
 
@@ -376,7 +374,7 @@ Due to the account authentication being external to the application, if Auth0 wa
 
 #### UI design
 
-The design process employed a sequential approach that involved utilising various design fidelities. Starting with a rough wireframe on paper as the initial low-fidelity design, it served as the foundation for the medium-fidelity design, which provided greater detail. 
+The design process employed a sequential approach that involved utilising various design fidelities. Starting with a rough wireframe on paper as the initial low-fidelity design, it served as the foundation for the medium-fidelity design, which provided greater detail.
 The 'high-fidelity' design for SmartStretch's UI was developed using Figma, a potent visualisation tool that facilitates the creation of production-ready app interfaces, including animations and load delays.
 
 The following is the low-fidelity design that was sketched out on paper. This design serves as a wire-frame for the medium-fidelity design process.

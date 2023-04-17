@@ -381,11 +381,11 @@ The 'high-fidelity' design for SmartStretch's UI was developed using Figma, a po
 
 The following is the low-fidelity design that was sketched out on paper. This design serves as a wire-frame for the medium-fidelity design process.
 
-![Low-Fidelity Design](/Dissertation/Documentation/DocumentationImages/low-fi.png)
+![Low-Fidelity Design](Documentation/DocumentationImages/low-fi.png)
 
 The following is the medium-fidelity design that was created using basic Photoshop shapes and free for use images. This design serves as a wire-frame for the final high-fidelity design.
 
-![Medium-Fidelity Design](/Dissertation/Documentation/DocumentationImages/medi-fi.png)
+![Medium-Fidelity Design](Documentation/DocumentationImages/medi-fi.png)
 
 The following renders are High-fidelity replicating what the finished product will look like:
 

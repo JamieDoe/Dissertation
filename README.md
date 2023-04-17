@@ -1,15 +1,22 @@
-# dissertation
+# StretchSmart
+
+```markdown
+This application was created for my software engineering final year dissertation.
+```
 
 ## Table of Contents
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+- [StretchSmart](#stretchsmart)
+  - [Table of Contents](#table-of-contents)
+  - [About ](#about-)
+  - [Getting Started ](#getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
+  - [Usage ](#usage-)
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+StretchSmart was created as a test to find out what the best software design methodology 
 
 ## Getting Started <a name = "getting_started"></a>
 

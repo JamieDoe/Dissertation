@@ -155,9 +155,25 @@ body {
 
 #mainContentContainer {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1fr 5fr;
+    margin: auto;
+}
+
+#homeTitle {
+    color: #303841;
+    font-size: 1.5rem;
+    margin: auto;
 }
 
 #bodyPartSelector {
     width: 90%;
-    background-image: url("/assets/bodyFront.png");
+    margin: auto;
+}
+
+.chestBtns {
+    width: 100px;
+    height: 100px;
+    background-color: #303841;
 }

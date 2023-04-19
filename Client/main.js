@@ -3,6 +3,7 @@
 // get the body element.
 const body = document.querySelector('body');
 
+// creates body part selection page.
 function homePage() {
 
     while (body.firstChild) {
@@ -19,7 +20,6 @@ function homePage() {
     homeTitle.innerHTML = 'Select a body part';
     mainContentContainer.appendChild(homeTitle);
 
-
     // creates the body part selector.
 
     const bodyPartSelector = document.createElement('div');
@@ -28,7 +28,7 @@ function homePage() {
 
 
     // create a head button.
-    const headBtn = document.createElement('button');
+    /*const headBtn = document.createElement('button');
     headBtn.setAttribute('id', 'headBtn');
     headBtn.innerHTML = 'Head';
     bodyPartSelector.appendChild(headBtn);
@@ -36,6 +36,7 @@ function homePage() {
     headBtn.addEventListener('click', () => {
         videoReturn('head');
     });
+    */
 
     navBar();
 };

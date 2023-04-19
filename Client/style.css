@@ -150,3 +150,14 @@ body {
     border-radius: 5px;
     margin: 18px 10px 0 10px;
 }
+
+/* Body part selection page */
+
+#mainContentContainer {
+    width: 100%;
+}
+
+#bodyPartSelector {
+    width: 90%;
+    background-image: url("/assets/bodyFront.png");
+}

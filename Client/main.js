@@ -3,6 +3,17 @@
 // get the body element.
 const body = document.querySelector('body');
 
+function homePage() {
+
+    while (body.firstChild) {
+        body.removeChild(body.firstChild);
+    }
+
+
+
+    navBar();
+};
+
 function settingsPage() {
     // remove all the elements from the body, except those that are in the navbar.
     while (body.firstChild) {
@@ -16,33 +27,34 @@ function settingsPage() {
         // create the settings page.
         const settingTitle = document.createElement('h1');
         settingTitle.setAttribute('id', 'settingTitle');
-        settingTitle.innerHTML = 'Settings';
+        settingTitle.innerHTML = 'Preferences';
         settingContainer.appendChild(settingTitle);
 
     // create a language select element.
     const languageSelect = document.createElement('select');
+    languageSelect.setAttribute('id', 'languageSelect');
         languageSelect.setAttribute('class', 'settingSelectors');
-    const languageOption1 = document.createElement('option');
-    const languageOption2 = document.createElement('option');
-    const languageOption3 = document.createElement('option');
-    const languageOption4 = document.createElement('option');
-    const languageOption5 = document.createElement('option');
+        const languageOption1 = document.createElement('option');
+        const languageOption2 = document.createElement('option');
+        const languageOption3 = document.createElement('option');
+        const languageOption4 = document.createElement('option');
+        const languageOption5 = document.createElement('option');
 
     // add id's and classes to the language select element.
     languageSelect.setAttribute('id', 'languageSelect');
-    languageOption1.setAttribute('class', 'languageOption');
-    languageOption2.setAttribute('class', 'languageOption');
-    languageOption3.setAttribute('class', 'languageOption');
-    languageOption4.setAttribute('class', 'languageOption');
-    languageOption5.setAttribute('class', 'languageOption');
+        languageOption1.setAttribute('class', 'languageOption');
+        languageOption2.setAttribute('class', 'languageOption');
+        languageOption3.setAttribute('class', 'languageOption');
+        languageOption4.setAttribute('class', 'languageOption');
+        languageOption5.setAttribute('class', 'languageOption');
 
     // append the language select element to the body.
     settingContainer.appendChild(languageSelect);
-    languageSelect.appendChild(languageOption1);
-    languageSelect.appendChild(languageOption2);
-    languageSelect.appendChild(languageOption3);
-    languageSelect.appendChild(languageOption4);
-    languageSelect.appendChild(languageOption5);
+        languageSelect.appendChild(languageOption1);
+        languageSelect.appendChild(languageOption2);
+        languageSelect.appendChild(languageOption3);
+        languageSelect.appendChild(languageOption4);
+        languageSelect.appendChild(languageOption5);
 
     // add content to the language options.
     languageOption1.innerHTML = 'English';
@@ -72,9 +84,43 @@ function settingsPage() {
     themeOption1.innerHTML = 'Light';
     themeOption2.innerHTML = 'Dark';
 
+    // create a support & feedback button.
+    const supportFeedback = document.createElement('div');
+    supportFeedback.setAttribute('id', 'supportFeedback');
+        supportFeedback.setAttribute('class', 'settingSelectors');
+    supportFeedback.innerHTML = 'Support & Feedback';
+    settingContainer.appendChild(supportFeedback);
 
 
     console.log('settings page');
+
+
+    const settingsLogContainer = document.createElement('div');
+    settingsLogContainer.setAttribute('id', 'settingsLogContainer');
+    settingContainer.appendChild(settingsLogContainer);
+
+    // create a login button.
+    const loginBtn = document.createElement('button');
+    loginBtn.setAttribute('class', 'setLogBtns');
+    loginBtn.innerHTML = 'Login';
+
+    // create a logout button.
+    const logoutBtn = document.createElement('button');
+    logoutBtn.setAttribute('class', 'setLogBtns');
+    logoutBtn.innerHTML = 'Logout';
+
+
+    settingsLogContainer.appendChild(loginBtn);
+    settingsLogContainer.appendChild(logoutBtn);
+
+    loginBtn.addEventListener('click', () => {
+        window.location.href = 'http://localhost:8080/login';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = 'http://localhost:8080/logout';
+    });
+
     
     
     navBar();
@@ -124,6 +170,10 @@ function navBar() {
 
     navItem1.addEventListener('click', () => {
         settingsPage();
+    });
+
+    navItem3.addEventListener('click', () => {
+        homePage();
     });
 };
 

@@ -80,15 +80,36 @@ body {
 
 #settingContainer {
     width: 80%;
+    height: 500px;
     background-color: #303841;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
+    border-radius: 5px;
+    margin: 100px auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+#settingTitle {
+    color: white;
+    font-size: 2rem;
     margin: auto;
 }
 
 .settingSelectors {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #303841;
+    color: white;
+    margin: auto;
+    font-size: 1.1rem;
+}
+
+#languageSelect {
     width: 100px;
     height: 30px;
     border-radius: 5px;
@@ -96,4 +117,36 @@ body {
     background-color: #303841;
     color: white;
     margin: auto;
+    font-size: 1.1rem;
+}
+
+#themeSelect {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #303841;
+    color: white;
+    margin: auto;
+    font-size: 1.1rem;
+}
+
+#settingsLogContainer {
+    width: 70%;
+    height: 80%;
+    background-color: #F5F5F5;
+    margin: auto;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.setLogBtns {
+    min-width: 40%;
+    height: 50%;
+    background-color: #303841;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    margin: 18px 10px 0 10px;
 }

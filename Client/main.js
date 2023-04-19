@@ -8,11 +8,41 @@ function homePage() {
     while (body.firstChild) {
         body.removeChild(body.firstChild);
     }
+    // create the main content container.
+    const mainContentContainer = document.createElement('div');
+    mainContentContainer.setAttribute('id', 'mainContentContainer');
+    body.appendChild(mainContentContainer);
+
+    // create the title.
+    const homeTitle = document.createElement('h1');
+    homeTitle.setAttribute('id', 'homeTitle');
+    homeTitle.innerHTML = 'Select a body part';
+    mainContentContainer.appendChild(homeTitle);
 
 
+    // creates the body part selector.
+
+    const bodyPartSelector = document.createElement('div');
+    bodyPartSelector.setAttribute('id', 'bodyPartSelector');
+    mainContentContainer.appendChild(bodyPartSelector);
+
+
+    // create a head button.
+    const headBtn = document.createElement('button');
+    headBtn.setAttribute('id', 'headBtn');
+    headBtn.innerHTML = 'Head';
+    bodyPartSelector.appendChild(headBtn);
+
+    headBtn.addEventListener('click', () => {
+        videoReturn('head');
+    });
 
     navBar();
 };
+
+function videoReturn(part) {
+    console.log(part.toString());
+}
 
 function settingsPage() {
     // remove all the elements from the body, except those that are in the navbar.
@@ -261,6 +291,7 @@ function userProfile() {
 };
 
 function init() {
+    homePage()
     navBar();
     login();
 };

@@ -25,51 +25,41 @@ function homePage() {
     const bodyPartSelector = document.createElement('img');
     bodyPartSelector.setAttribute('id', 'bodyPartSelector');
     mainContentContainer.appendChild(bodyPartSelector);
+    
     bodyPartSelector.src = 'assets/bodyFront.png';
 
-/*
-    // create 2 buttons a button for chest area.
-    const leftChest = document.createElement('button');
-    const rightChest = document.createElement('button');
-    leftChest.setAttribute('class', 'chestBtns');
-    rightChest.setAttribute('class', 'chestBtns');
-    leftChest.innerHTML = 'Left Pectoral';
-    rightChest.innerHTML = 'Right Pectoral';
-    bodyPartSelector.appendChild(leftChest);
-*/
-    // create a button to toggle the image for the body part selector.
-    const toggleBtn = document.createElement('button');
-    toggleBtn.setAttribute('id', 'toggleBtn');
-    mainContentContainer.appendChild(toggleBtn);
-    toggleBtn.innerHTML = 'Back';
+    // create a button with the inner html sating Click For Back
+    const backBtn = document.createElement('button');
+    backBtn.setAttribute('id', 'backBtn');
+    backBtn.innerHTML = 'Click For Back';
+    mainContentContainer.appendChild(backBtn);
 
-    toggleBtn.addEventListener('click', ()=> {
+    let isImg = true;
 
-        console.log('toggle button clicked');
-
-        if (bodyPartSelector.src != 'assets/bodyBack.png') {
-            bodyPartSelector.src = 'assets/bodyFront.png';
-            toggleBtn.innerHTML = 'Back View';
-        } else {
-            bodyPartSelector.src = 'assets/bodyBack.png';
-            toggleBtn.innerHTML = 'Front View';
-        };
-    });
-/*
-    // add an event listener to bodypartselector to change the image on drag
-    bodyPartSelector.addEventListener('click', () => {
-        if (bodyPartSelector.src === 'assets/bodyFront.png') {
+    backBtn.addEventListener('click', () => {
+        if(isImg) {
             bodyPartSelector.src = 'assets/bodyBack.png';
         } else {
             bodyPartSelector.src = 'assets/bodyFront.png';
-        };
+        }
+        isImg = !isImg;
     });
 
-    leftChest.addEventListener('click', () => {
-        videoReturn('left Chest');
-    });
+    const bodyButtonContainer = document.createElement('div');
+    bodyButtonContainer.setAttribute('id', 'bodyButtonContainer');
+    mainContentContainer.appendChild(bodyButtonContainer);
 
-    */
+    
+
+    // create a head button.
+    const leftPec = document.createElement('button');
+    leftPec.setAttribute('id', 'leftPecBtn');
+    leftPec.innerHTML = 'Left Peck';
+    bodyButtonContainer.appendChild(leftPec);
+
+    leftPec.addEventListener('click', () => {
+        videoReturn('head');
+    });
 
     navBar();
 };

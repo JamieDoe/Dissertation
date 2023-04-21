@@ -14,17 +14,26 @@ function homePage() {
     mainContentContainer.setAttribute('id', 'mainContentContainer');
     body.appendChild(mainContentContainer);
 
+    const contentGrid = document.createElement('div');
+    contentGrid.setAttribute('id', 'contentGrid');
+    mainContentContainer.appendChild(contentGrid);
+
+
     // create the title.
     const homeTitle = document.createElement('h1');
     homeTitle.setAttribute('id', 'homeTitle');
     homeTitle.innerHTML = 'Select a body part';
-    mainContentContainer.appendChild(homeTitle);
+    contentGrid.appendChild(homeTitle);
 
     // creates the body part selector.
 
+    const bodyContainer = document.createElement('div');
+    bodyContainer.setAttribute('id', 'bodyContainer');
+    contentGrid.appendChild(bodyContainer);
+
     const bodyPartSelector = document.createElement('img');
     bodyPartSelector.setAttribute('id', 'bodyPartSelector');
-    mainContentContainer.appendChild(bodyPartSelector);
+    bodyContainer.appendChild(bodyPartSelector);
     
     bodyPartSelector.src = 'assets/bodyFront.png';
 
@@ -32,41 +41,108 @@ function homePage() {
     const backBtn = document.createElement('button');
     backBtn.setAttribute('id', 'backBtn');
     backBtn.innerHTML = 'Click For Back';
-    mainContentContainer.appendChild(backBtn);
+    contentGrid.appendChild(backBtn);
+
+    const bodyButtonContainer = document.createElement('div');
+    bodyButtonContainer.setAttribute('id', 'bodyButtonContainer');
+    bodyContainer.appendChild(bodyButtonContainer);
+
+    // create the body part select buttons.
+
+    // creates both pec buttons.
+    const leftPec = document.createElement('button');
+    leftPec.setAttribute('id', 'leftPecBtn');
+    leftPec.setAttribute('class', 'bodyBtns');
+    leftPec.innerHTML = 'Left Pec';
+    bodyButtonContainer.appendChild(leftPec); 
+    const rightPec = document.createElement('button');
+    rightPec.setAttribute('id', 'rightPecBtn');
+    rightPec.setAttribute('class', 'bodyBtns');
+    rightPec.innerHTML = 'Right Pec';
+    bodyButtonContainer.appendChild(rightPec); 
+
+    // creates both bicep buttons.
+    const leftBicep = document.createElement('button');
+    leftBicep.setAttribute('id', 'leftBicepBtn');
+    leftBicep.setAttribute('class', 'bodyBtns');
+    leftBicep.innerHTML = 'Left Bicep';
+    bodyButtonContainer.appendChild(leftBicep);
+    const rightBicep = document.createElement('button');
+    rightBicep.setAttribute('id', 'rightBicepBtn');
+    rightBicep.setAttribute('class', 'bodyBtns');
+    rightBicep.innerHTML = 'Right Bicep';
+    bodyButtonContainer.appendChild(rightBicep);
+
+    // creates both ab buttons.
+    const upperAbs = document.createElement('button');
+    upperAbs.setAttribute('id', 'upperAbsBtn');
+    upperAbs.setAttribute('class', 'bodyBtns');
+    upperAbs.innerHTML = 'Upper Abs';
+    bodyButtonContainer.appendChild(upperAbs);
+    const lowerAbs = document.createElement('button');
+    lowerAbs.setAttribute('id', 'lowerAbsBtn');
+    lowerAbs.setAttribute('class', 'bodyBtns');
+    lowerAbs.innerHTML = 'Lower Abs';
+    bodyButtonContainer.appendChild(lowerAbs);
+
+    // creates both quad buttons.
+    const leftQuad = document.createElement('button');
+    leftQuad.setAttribute('id', 'leftQuadBtn');
+    leftQuad.setAttribute('class', 'bodyBtns');
+    leftQuad.innerHTML = 'Left Quad';
+    bodyButtonContainer.appendChild(leftQuad);
+    const rightQuad = document.createElement('button');
+    rightQuad.setAttribute('id', 'rightQuadBtn');
+    rightQuad.setAttribute('class', 'bodyBtns');
+    rightQuad.innerHTML = 'Right Quad';
+    bodyButtonContainer.appendChild(rightQuad);
+
+    // creates both calf buttons.
+    const leftCalf = document.createElement('button');
+    leftCalf.setAttribute('id', 'leftCalfBtn');
+    leftCalf.setAttribute('class', 'bodyBtns');
+    leftCalf.innerHTML = 'Left Calf';
+    bodyButtonContainer.appendChild(leftCalf);
+    const rightCalf = document.createElement('button');
+    rightCalf.setAttribute('id', 'rightCalfBtn');
+    rightCalf.setAttribute('class', 'bodyBtns');
+    rightCalf.innerHTML = 'Right Calf';
+    bodyButtonContainer.appendChild(rightCalf);
+
+    const buttonNumber = document.querySelectorAll('.bodyBtns');
 
     let isImg = true;
 
     backBtn.addEventListener('click', () => {
         if(isImg) {
             bodyPartSelector.src = 'assets/bodyBack.png';
+            for (let i = 0; i < buttonNumber.length; i++) {
+                buttonNumber[i].style.display = 'none';
+            }
+            
         } else {
             bodyPartSelector.src = 'assets/bodyFront.png';
+            for (let i = 0; i < buttonNumber.length; i++) {
+                buttonNumber[i].style.display = 'block';
+            }
         }
         isImg = !isImg;
     });
 
-    const bodyButtonContainer = document.createElement('div');
-    bodyButtonContainer.setAttribute('id', 'bodyButtonContainer');
-    mainContentContainer.appendChild(bodyButtonContainer);
-
-    
-
-    // create a head button.
-    const leftPec = document.createElement('button');
-    leftPec.setAttribute('id', 'leftPecBtn');
-    leftPec.innerHTML = 'Left Peck';
-    bodyButtonContainer.appendChild(leftPec);
-
-    leftPec.addEventListener('click', () => {
-        videoReturn('head');
-    });
+    for (let i = 0; i < buttonNumber.length; i++) {
+        buttonNumber[i].addEventListener('click', () => {
+            videoReturn(buttonNumber[i].innerHTML);
+        });
+    };
 
     navBar();
 };
 
 function videoReturn(part) {
-    console.log(part.toString());
-}
+
+    console.log(part);
+
+};
 
 function settingsPage() {
     // remove all the elements from the body, except those that are in the navbar.
@@ -309,7 +385,7 @@ function userProfile() {
 
     // call the fetch function to get the profile data for element content.
     fetchProfile().then(data => {
-        profileName.innerHTML = `User Name: ${data.name}`;
+        profileName.innerHTML = `Username: ${data.name}`;
         profileEmail.innerHTML = `Email: ${data.email}`;
     });
 };

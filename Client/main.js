@@ -47,7 +47,7 @@ function homePage() {
     bodyButtonContainer.setAttribute('id', 'bodyButtonContainer');
     bodyContainer.appendChild(bodyButtonContainer);
 
-    // create the body part select buttons.
+    // create the front body part select buttons.
 
     // creates both pec buttons.
     const leftPec = document.createElement('button');
@@ -97,41 +97,158 @@ function homePage() {
     rightQuad.innerHTML = 'Right Quad';
     bodyButtonContainer.appendChild(rightQuad);
 
+    // creates both shin buttons.
+    const leftShin = document.createElement('button');
+    leftShin.setAttribute('id', 'leftShinBtn');
+    leftShin.setAttribute('class', 'bodyBtns');
+    leftShin.innerHTML = 'Left Shin';
+    bodyButtonContainer.appendChild(leftShin);
+    const rightShin = document.createElement('button');
+    rightShin.setAttribute('id', 'rightShinBtn');
+    rightShin.setAttribute('class', 'bodyBtns');
+    rightShin.innerHTML = 'Right Shin';
+    bodyButtonContainer.appendChild(rightShin);
+
+    // creates back body part select buttons.
+
+    // creates both trap buttons.
+    const leftTrap = document.createElement('button');
+    leftTrap.setAttribute('id', 'leftTrapBtn');
+    leftTrap.setAttribute('class', 'backBtns');
+    leftTrap.innerHTML = 'Left Trap';
+    bodyButtonContainer.appendChild(leftTrap);
+    const rightTrap = document.createElement('button');
+    rightTrap.setAttribute('id', 'rightTrapBtn');
+    rightTrap.setAttribute('class', 'backBtns');
+    rightTrap.innerHTML = 'Right Trap';
+    bodyButtonContainer.appendChild(rightTrap);
+
+    // creates both shoulder buttons.
+    const leftShoulder = document.createElement('button');
+    leftShoulder.setAttribute('id', 'leftShoulderBtn');
+    leftShoulder.setAttribute('class', 'backBtns');
+    leftShoulder.innerHTML = 'Left Delts';
+    bodyButtonContainer.appendChild(leftShoulder);
+    const rightShoulder = document.createElement('button');
+    rightShoulder.setAttribute('id', 'rightShoulderBtn');
+    rightShoulder.setAttribute('class', 'backBtns');
+    rightShoulder.innerHTML = 'Right Delts';
+    bodyButtonContainer.appendChild(rightShoulder);
+
+    // creates both lat buttons.
+    const leftLat = document.createElement('button');
+    leftLat.setAttribute('id', 'leftLatBtn');
+    leftLat.setAttribute('class', 'backBtns');
+    leftLat.innerHTML = 'Left Lat';
+    bodyButtonContainer.appendChild(leftLat);
+    const rightLat = document.createElement('button');
+    rightLat.setAttribute('id', 'rightLatBtn');
+    rightLat.setAttribute('class', 'backBtns');
+    rightLat.innerHTML = 'Right Lat';
+    bodyButtonContainer.appendChild(rightLat);
+
+    // creates both tricep buttons.
+    const leftTricep = document.createElement('button');
+    leftTricep.setAttribute('id', 'leftTricepBtn');
+    leftTricep.setAttribute('class', 'backBtns');
+    leftTricep.innerHTML = 'Left Tricep';
+    bodyButtonContainer.appendChild(leftTricep);
+    const rightTricep = document.createElement('button');
+    rightTricep.setAttribute('id', 'rightTricepBtn');
+    rightTricep.setAttribute('class', 'backBtns');
+    rightTricep.innerHTML = 'Right Tricep';
+    bodyButtonContainer.appendChild(rightTricep);
+
+    // creates both lower back button.
+
+    const lowerBack = document.createElement('button');
+    lowerBack.setAttribute('id', 'lowerBackBtn');
+    lowerBack.setAttribute('class', 'backBtns');
+    lowerBack.innerHTML = 'Lower Back';
+    bodyButtonContainer.appendChild(lowerBack);
+
+    // creates both glute buttons.
+    const leftGlute = document.createElement('button');
+    leftGlute.setAttribute('id', 'leftGluteBtn');
+    leftGlute.setAttribute('class', 'backBtns');
+    leftGlute.innerHTML = 'Left Glute';
+    bodyButtonContainer.appendChild(leftGlute);
+    const rightGlute = document.createElement('button');
+    rightGlute.setAttribute('id', 'rightGluteBtn');
+    rightGlute.setAttribute('class', 'backBtns');
+    rightGlute.innerHTML = 'Right Glute';
+    bodyButtonContainer.appendChild(rightGlute);
+
+    // creates both hamstring buttons.
+    const leftHamstring = document.createElement('button');
+    leftHamstring.setAttribute('id', 'leftHamstringBtn');
+    leftHamstring.setAttribute('class', 'backBtns');
+    leftHamstring.innerHTML = 'Left Hamstring';
+    bodyButtonContainer.appendChild(leftHamstring);
+    const rightHamstring = document.createElement('button');
+    rightHamstring.setAttribute('id', 'rightHamstringBtn');
+    rightHamstring.setAttribute('class', 'backBtns');
+    rightHamstring.innerHTML = 'Right Hamstring';
+    bodyButtonContainer.appendChild(rightHamstring);
+
     // creates both calf buttons.
     const leftCalf = document.createElement('button');
     leftCalf.setAttribute('id', 'leftCalfBtn');
-    leftCalf.setAttribute('class', 'bodyBtns');
+    leftCalf.setAttribute('class', 'backBtns');
     leftCalf.innerHTML = 'Left Calf';
     bodyButtonContainer.appendChild(leftCalf);
     const rightCalf = document.createElement('button');
     rightCalf.setAttribute('id', 'rightCalfBtn');
-    rightCalf.setAttribute('class', 'bodyBtns');
+    rightCalf.setAttribute('class', 'backBtns');
     rightCalf.innerHTML = 'Right Calf';
     bodyButtonContainer.appendChild(rightCalf);
 
-    const buttonNumber = document.querySelectorAll('.bodyBtns');
+    // create test button.
+    const testBtn = document.createElement('button');
+    testBtn.setAttribute('id', 'testBtn');
+    testBtn.setAttribute('class', 'backBtns');
+    testBtn.innerHTML = 'Test';
+    bodyButtonContainer.appendChild(testBtn);
+
+    
+
+
+    const frontButtonNumber = document.querySelectorAll('.bodyBtns');
+    const backButtonNumber = document.querySelectorAll('.backBtns');
 
     let isImg = true;
 
     backBtn.addEventListener('click', () => {
         if(isImg) {
             bodyPartSelector.src = 'assets/bodyBack.png';
-            for (let i = 0; i < buttonNumber.length; i++) {
-                buttonNumber[i].style.display = 'none';
+            for (let i = 0; i < frontButtonNumber.length; i++) {
+                frontButtonNumber[i].style.display = 'none';
             }
-            
+            for (let i = 0; i < backButtonNumber.length; i++) {
+                backButtonNumber[i].style.display = 'block';
+            }
         } else {
             bodyPartSelector.src = 'assets/bodyFront.png';
-            for (let i = 0; i < buttonNumber.length; i++) {
-                buttonNumber[i].style.display = 'block';
+            for (let i = 0; i < frontButtonNumber.length; i++) {
+                frontButtonNumber[i].style.display = 'block';
+            }
+            for (let i = 0; i < backButtonNumber.length; i++) {
+                backButtonNumber[i].style.display = 'none';
             }
         }
         isImg = !isImg;
     });
+    
 
-    for (let i = 0; i < buttonNumber.length; i++) {
-        buttonNumber[i].addEventListener('click', () => {
-            videoReturn(buttonNumber[i].innerHTML);
+    for (let i = 0; i < frontButtonNumber.length; i++) {
+        frontButtonNumber[i].addEventListener('click', () => {
+            videoReturn(frontButtonNumber[i].innerHTML);
+        });
+    };
+
+    for(let i = 0; i < backButtonNumber.length; i++) {
+        backButtonNumber[i].addEventListener('click', () => {
+            videoReturn(backButtonNumber[i].innerHTML);
         });
     };
 
@@ -140,7 +257,55 @@ function homePage() {
 
 function videoReturn(part) {
 
-    console.log(part);
+    while (body.firstChild) {
+        body.removeChild(body.firstChild);
+    }
+
+    navBar();
+
+    const videoContainer = document.createElement('div');
+    videoContainer.setAttribute('id', 'videoContainer');
+    body.appendChild(videoContainer);
+
+    const pageGrid = document.createElement('div');
+    pageGrid.setAttribute('id', 'pageGrid');
+    videoContainer.appendChild(pageGrid);
+
+    const videoTitle = document.createElement('h1');
+    videoTitle.setAttribute('id', 'videoTitle');
+    videoTitle.innerHTML = 'Stretch Videos for ' + part;
+    pageGrid.appendChild(videoTitle);
+
+    let video;
+
+    $(document).ready(function() {
+        
+        const API_KEY = "AIzaSyAQUFhtDhitr7_P1RDql8F5g3zVnh3sIBs";
+        const input = "Stretch videos for " + part;
+
+        videoSearch(API_KEY, input, 5);
+        
+    });
+
+    function videoSearch(key, query, maxResults) {
+
+        $.get("https:/www.googleapis.com/youtube/v3/search?key=" + key 
+            + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + query, 
+                function(data) {
+                    console.log(data);
+
+                    data.items.forEach(item => {
+                        video = item.id.videoId;
+                        const videoFrame = document.createElement('iframe');
+                        videoFrame.setAttribute('id', 'videoFrame');
+                        videoFrame.setAttribute('src', 'https://www.youtube.com/embed/' + video);
+                        videoFrame.setAttribute('frameborder', '0');
+                        videoFrame.setAttribute('allow', 'fullscreen');
+                        pageGrid.appendChild(videoFrame);
+                    })
+                }); 
+
+    };
 
 };
 

@@ -251,6 +251,8 @@ function homePage() {
             videoReturn(backButtonNumber[i].innerHTML);
         });
     };
+    
+    
 
     navBar();
 };
@@ -276,14 +278,19 @@ function videoReturn(part) {
     videoTitle.innerHTML = 'Stretch Videos for ' + part;
     pageGrid.appendChild(videoTitle);
 
+    const loader = document.createElement('div');
+    loader.setAttribute('class', 'loader');
+    pageGrid.appendChild(loader);
+
+
     let video;
 
     $(document).ready(function() {
-        
-        const API_KEY = "AIzaSyAQUFhtDhitr7_P1RDql8F5g3zVnh3sIBs";
+
+        const key = 'AIzaSyAQUFhtDhitr7_P1RDql8F5g3zVnh3sIBs';
         const input = "Stretch videos for " + part;
 
-        videoSearch(API_KEY, input, 5);
+        videoSearch(key, input, 5);
         
     });
 
@@ -294,6 +301,8 @@ function videoReturn(part) {
                 function(data) {
                     console.log(data);
 
+                    loader.style.display = 'none';
+
                     data.items.forEach(item => {
                         video = item.id.videoId;
                         const videoFrame = document.createElement('iframe');
@@ -302,12 +311,99 @@ function videoReturn(part) {
                         videoFrame.setAttribute('frameborder', '0');
                         videoFrame.setAttribute('allow', 'fullscreen');
                         pageGrid.appendChild(videoFrame);
-                    })
-                }); 
 
-    };
+                        // create video title
+                        const videoTitle = document.createElement('h2');
+                        videoTitle.setAttribute('id', 'ytVideoTitle');
+                        videoTitle.innerHTML =item.snippet.title;
+                        pageGrid.appendChild(videoTitle);
+                        
+                        let likeBtn = document.createElement('button');
+                        likeBtn.setAttribute('id', 'likeBtn');
+                        likeBtn.innerHTML = 'Like Video';
+                        pageGrid.appendChild(likeBtn);
 
+                            const videoObject = {
+                                videoId: video,
+                                videoTitle: item.snippet.title
+                            };
+                        
+                            likeBtn.addEventListener('click', async () => {
+                                try {
+                                    const response = await fetch('/api/like-video', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(videoObject)
+                                    });
+                                    if (response.ok) {
+                                        likeBtn.innerHTML = 'Liked';
+                                        likeBtn.disabled = true;
+                                    } else {
+                                        console.error('Error liking video');
+                                    }
+                                } catch (error) {
+                                    console.error('Error:', error);
+                                }
+                            });
+                        });
+                        
+                });
+            };
 };
+
+async function displayLikedVideos() {
+    try {
+        const response = await fetch('/api/liked-videos');
+        if (response.ok) {
+            const { likedVideos } = await response.json();
+
+            // Remove existing content and add navigation bar
+            while (body.firstChild) {
+                body.removeChild(body.firstChild);
+            }
+            navBar();
+
+            // Create a container for the liked videos
+            const likedVideosContainer = document.createElement('div');
+            likedVideosContainer.setAttribute('id', 'likedVideosContainer');
+            body.appendChild(likedVideosContainer);
+
+            const likePageGrid = document.createElement('div');
+            likePageGrid.setAttribute('id', 'likePageGrid');
+            likedVideosContainer.appendChild(likePageGrid);
+
+            // Create a header for the page
+            const likedVideosHeader = document.createElement('h1');
+            likedVideosHeader.setAttribute('id', 'likedVideosHeader');
+            likedVideosHeader.innerHTML = 'Your Liked Videos';
+            likePageGrid.appendChild(likedVideosHeader);
+
+            // Render the liked videos using the `likedVideos` array
+            likedVideos.forEach(video => {
+                // Create iframe for the video
+                const videoFrame = document.createElement('iframe');
+                videoFrame.setAttribute('id', 'videoFrame');
+                videoFrame.setAttribute('src', 'https://www.youtube.com/embed/' + video.videoId);
+                videoFrame.setAttribute('frameborder', '0');
+                videoFrame.setAttribute('allow', 'fullscreen');
+                likePageGrid.appendChild(videoFrame);
+
+                // Create video title
+                const videoTitle = document.createElement('h2');
+                videoTitle.setAttribute('id', 'likedVideoTitle');
+                videoTitle.innerHTML = video.videoTitle;
+                likePageGrid.appendChild(videoTitle);
+            });
+        } else {
+            console.error('Error fetching liked videos');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 
 function settingsPage() {
     // remove all the elements from the body, except those that are in the navbar.
@@ -416,8 +512,6 @@ function settingsPage() {
         window.location.href = 'http://localhost:8080/logout';
     });
 
-    
-    
     navBar();
 };
 
@@ -431,7 +525,6 @@ function navBar() {
     const navItem2 = document.createElement('li');
     const navItem3 = document.createElement('li');
     const navItem4 = document.createElement('li');
-    const navItem5 = document.createElement('li');
 
     // add id's and classes to the navbar.
     navContainer.setAttribute('id', 'navContainer');
@@ -440,7 +533,6 @@ function navBar() {
     navItem2.setAttribute('class', 'navItem');
     navItem3.setAttribute('class', 'navItem');
     navItem4.setAttribute('class', 'navItem');
-    navItem5.setAttribute('class', 'navItem');
 
     // append the navbar to the body.
     body.appendChild(navContainer);
@@ -449,74 +541,92 @@ function navBar() {
     navList.appendChild(navItem2);
     navList.appendChild(navItem3);
     navList.appendChild(navItem4);
-    navList.appendChild(navItem5);
 
     // add content to the nav items.
     navItem1.innerHTML = 'Settings';
-    navItem2.innerHTML = 'History';
+    navItem2.innerHTML = 'Likes';
     navItem3.innerHTML = 'Home';
-    navItem4.innerHTML = 'Videos';
-    navItem5.innerHTML = 'Profile';
-
-
-    navItem5.addEventListener('click', () => {
-        userProfile();
-    });
+    navItem4.innerHTML = 'Profile';
 
     navItem1.addEventListener('click', () => {
         settingsPage();
     });
 
+    navItem2.addEventListener('click', () => {
+        checkUserAuthenticationLikes();
+    });
+
     navItem3.addEventListener('click', () => {
         homePage();
     });
-};
 
-// create the main page content.
-function login() {
-
-    const profileHover = document.querySelector('.navItem:nth-child(5)');
-
-    // create the div that will hold the buttons & create the buttons.
-    const logBtnContainer = document.createElement('div');
-    const loginButton = document.createElement('button');
-    const logoutButton = document.createElement('button');
-    
-    // add id's and classes to the buttons.
-    logBtnContainer.setAttribute('id', 'logBtnContainer');
-    loginButton.setAttribute('class', 'logBtns');
-    logoutButton.setAttribute('class', 'logBtns');
-
-    // add content to the buttons.
-    loginButton.innerHTML = 'Login';
-    logoutButton.innerHTML = 'Logout';
-
-    // append div to body, append the buttons to the div.
-    logBtnContainer.appendChild(loginButton);
-    logBtnContainer.appendChild(logoutButton);
-    body.appendChild(logBtnContainer);
-
-    // add event listeners to the buttons.
-    loginButton.addEventListener('click', () => {
-        window.location.href = 'http://localhost:8080/login';
-    });
-
-    logoutButton.addEventListener('click', () => {
-        window.location.href = 'http://localhost:8080/logout';
-    });
-
-    logBtnContainer.style.display = 'none';
-
-    profileHover.addEventListener('mouseover', () => {
-        // when hovering over profile button, login and logout buttons will appear. if user is not hovering then they disappear.
-        logBtnContainer.style.display = 'block';
-
-        profileHover.addEventListener('mouseout', () => {
-            logBtnContainer.style.display = 'none';
-        });
+    navItem4.addEventListener('click', () => {
+        checkUserAuthenticationProfile();
     });
 
 };
+
+async function checkUserAuthenticationLikes() {
+    try {
+      const response = await fetch('/api/user-authenticated');
+      if (response.status === 200) {
+        const data = await response.json();
+        // The user is authenticated, and you can access the user object in data.user
+        console.log('User authenticated:', data.user);
+        displayLikedVideos();
+      } else {
+        // The user is not authenticated
+        console.log('User not authenticated');
+        // Redirect to the login page
+        window.location.href = `/login?returnTo=${encodeURIComponent(window.location.href)}&redirectToProfile=true`;
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectToProfile = urlParams.get('redirectToProfile');
+          
+            if (redirectToProfile === 'true') {
+              // Remove the redirectToProfile parameter from the URL
+              urlParams.delete('redirectToProfile');
+              window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+          
+              checkUserAuthenticationLikes();
+            }
+          });
+    }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+    }
+  }
+
+async function checkUserAuthenticationProfile() {
+    try {
+      const response = await fetch('/api/user-authenticated');
+      if (response.status === 200) {
+        const data = await response.json();
+        // The user is authenticated, and you can access the user object in data.user
+        console.log('User authenticated:', data.user);
+        userProfile();
+      } else {
+        // The user is not authenticated
+        console.log('User not authenticated');
+        // Redirect to the login page
+        window.location.href = `/login?returnTo=${encodeURIComponent(window.location.href)}&redirectToProfile=true`;
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectToProfile = urlParams.get('redirectToProfile');
+          
+            if (redirectToProfile === 'true') {
+              // Remove the redirectToProfile parameter from the URL
+              urlParams.delete('redirectToProfile');
+              window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+          
+              checkUserAuthenticationProfile();
+            }
+          });
+    }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+    }
+  }
 
 // create the profile page content.
 function userProfile() {
@@ -526,7 +636,9 @@ function userProfile() {
     };
 
     navBar();
+
     
+
     // async function to fetch the profile data from the server.
     async function fetchProfile() {
         const response = await fetch('http://localhost:8080/profile');
@@ -553,11 +665,37 @@ function userProfile() {
         profileName.innerHTML = `Username: ${data.name}`;
         profileEmail.innerHTML = `Email: ${data.email}`;
     });
+
+    // create div for profile video count
+    const likedVideoCount = document.createElement('div');
+    likedVideoCount.setAttribute('id', 'likedVideoCount');
+    profileContainer.appendChild(likedVideoCount);
+
+    async function getLikedVideosCount() {
+        try {
+            const response = await fetch('/api/liked-videos/count');
+            if (response.ok) {
+                const { count } = await response.json();
+                likedVideoCount.innerHTML = 'Liked Videos: ' + count;
+                return count;
+            } else {
+                console.error('Error fetching liked videos count');
+                return 0;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return 0;
+        }
+    }
+
+
+    likedVideoCount.addEventListener('click', () => {
+        getLikedVideosCount();
+    });
 };
 
 function init() {
     homePage()
-    login();
 };
 
 window.addEventListener('load', init);

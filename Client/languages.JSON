@@ -1,0 +1,56 @@
+ {
+  "en": {
+    "homeTitle": "Select a body part",
+    "backBtn": "Click for back",
+    "navItem1": "Settings",
+    "navItem2": "Likes",
+    "navItem3": "Home",
+    "navItem4": "Profile",
+    "settingTitle": "Settings",
+    "english": "English",
+    "spanish": "Spanish",
+    "french": "French",
+    "lightMode": "Light",
+    "darkMode": "Dark",
+    "supportFeedback": "Support & Feedback",
+    "loginBtn": "Login",
+    "logoutBtn": "Logout"
+  
+    },
+
+  "es": {
+    "homeTitle": "Seleccione una parte del cuerpo",
+    "backBtn": "Haga clic para volver",
+    "navItem1": "Ajustes",
+    "navItem2": "Gustos",
+    "navItem3": "Casa",
+    "navItem4": "Perfil",
+    "settingTitle": "Ajustes",
+    "english": "Inglés",
+    "spanish": "Español",
+    "french": "Francés",
+    "lightMode": "Claro",
+    "darkMode": "Oscuro",
+    "supportFeedback": "Soporte y comentarios",
+    "loginBtn": "Acceso",
+    "logoutBtn": "Cerrar sesión"
+    },
+
+  "fr": {
+    "homeTitle": "Sélectionnez une partie du corps",
+    "backBtn": "Cliquez pour revenir",
+    "navItem1": "Paramètres",
+    "navItem2": "Aime",
+    "navItem3": "Accueil",
+    "navItem4": "Profil",
+    "settingTitle": "Paramètres",
+    "english": "Anglais",
+    "spanish": "Espagnol",
+    "french": "Français",
+    "lightMode": "Lumière",
+    "darkMode": "Sombre",
+    "supportFeedback": "Support et commentaires",
+    "loginBtn": "S'identifier",
+    "logoutBtn": "Se déconnecter"
+    }
+}

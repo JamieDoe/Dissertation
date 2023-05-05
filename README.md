@@ -4,50 +4,21 @@
 This application was created for my software engineering final year dissertation.
 ```
 
-## Table of Contents
-
-- [StretchSmart](#stretchsmart)
-  - [Table of Contents](#table-of-contents)
-  - [About ](#about-)
-  - [Getting Started ](#getting-started-)
-    - [Prerequisites](#prerequisites)
-    - [Installing](#installing)
-  - [Usage ](#usage-)
-
 ## About <a name = "about"></a>
 
-StretchSmart was created as a test to find out what the best software design methodology 
-
-## Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+StretchSmart was created as a test to find out what the best software design methodology.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+All modules should be included when the repository is cloned. If not then simply type 'npm instal' into your IDE terminal.
+Modules are essential to make sure you don't skip this step.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
+Once modules are installed, type 'npm start' in your terminal. You should be prompted with a message stating that the server has started hosting localhost:8080.
+Now go to your browser and type: localhost:8080.
+The app should now be running.
 
 ## Usage <a name = "usage"></a>
 
-Add notes about how to use the system.
+Select a body part that you wish to stretch from the body selector. A list of videos will be generated based on this input. you can like videos you want to save. To like the videos ensure you have an account.

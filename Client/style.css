@@ -7,8 +7,12 @@
 }
 
 
-body {
+body.lightTheme {
     background-color: #D6E6F2;
+}
+
+body.darkTheme {
+    background-color: #303841;
 }
 
 /*Account buttons styling*/

@@ -6,9 +6,11 @@ const body = document.querySelector('body');
 // creates body part selection page.
 function homePage() {
 
+    // removes old content.
     while (body.firstChild) {
         body.removeChild(body.firstChild);
     }
+
     // create the main content container.
     const mainContentContainer = document.createElement('div');
     mainContentContainer.setAttribute('id', 'mainContentContainer');
@@ -26,7 +28,6 @@ function homePage() {
     contentGrid.appendChild(homeTitle);
 
     // creates the body part selector.
-
     const bodyContainer = document.createElement('div');
     bodyContainer.setAttribute('id', 'bodyContainer');
     contentGrid.appendChild(bodyContainer);
@@ -37,7 +38,7 @@ function homePage() {
     
     bodyPartSelector.src = 'assets/bodyFront.png';
 
-    // create a button with the inner html sating Click For Back
+    // creates the back button.
     const backBtn = document.createElement('button');
     backBtn.setAttribute('id', 'backBtn');
     backBtn.innerHTML = 'Click For Back';
@@ -47,7 +48,7 @@ function homePage() {
     bodyButtonContainer.setAttribute('id', 'bodyButtonContainer');
     bodyContainer.appendChild(bodyButtonContainer);
 
-    // create the front body part select buttons.
+    // creates the front body part select buttons.
 
     // creates both pec buttons.
     const leftPec = document.createElement('button');
@@ -160,7 +161,6 @@ function homePage() {
     bodyButtonContainer.appendChild(rightTricep);
 
     // creates both lower back button.
-
     const lowerBack = document.createElement('button');
     lowerBack.setAttribute('id', 'lowerBackBtn');
     lowerBack.setAttribute('class', 'backBtns');
@@ -210,14 +210,12 @@ function homePage() {
     testBtn.innerHTML = 'Test';
     bodyButtonContainer.appendChild(testBtn);
 
-    
-
-
     const frontButtonNumber = document.querySelectorAll('.bodyBtns');
     const backButtonNumber = document.querySelectorAll('.backBtns');
 
     let isImg = true;
 
+    // Adds event to change body part selector orientation (back/front)
     backBtn.addEventListener('click', () => {
         if(isImg) {
             bodyPartSelector.src = 'assets/bodyBack.png';
@@ -239,7 +237,7 @@ function homePage() {
         isImg = !isImg;
     });
     
-
+    // Adds event to body buttons to get videoReturn function.
     for (let i = 0; i < frontButtonNumber.length; i++) {
         frontButtonNumber[i].addEventListener('click', () => {
             videoReturn(frontButtonNumber[i].innerHTML);
@@ -252,11 +250,11 @@ function homePage() {
         });
     };
     
-    
-
+    // Adds nav bar to page.
     navBar();
 };
 
+// Function to return videos based on body part selected.
 function videoReturn(part) {
 
     while (body.firstChild) {
@@ -265,6 +263,7 @@ function videoReturn(part) {
 
     navBar();
 
+    // Creates video container.
     const videoContainer = document.createElement('div');
     videoContainer.setAttribute('id', 'videoContainer');
     body.appendChild(videoContainer);
@@ -278,6 +277,7 @@ function videoReturn(part) {
     videoTitle.innerHTML = 'Stretch Videos for ' + part;
     pageGrid.appendChild(videoTitle);
 
+    // Creates loader.
     const loader = document.createElement('div');
     loader.setAttribute('class', 'loader');
     pageGrid.appendChild(loader);
@@ -287,13 +287,15 @@ function videoReturn(part) {
 
     $(document).ready(function() {
 
+        // API key and search input.
         const key = 'AIzaSyAQUFhtDhitr7_P1RDql8F5g3zVnh3sIBs';
         const input = "Stretch videos for " + part;
 
         videoSearch(key, input, 5);
         
     });
-
+    
+    // Function to search youtube for videos.
     function videoSearch(key, query, maxResults) {
 
         $.get("https:/www.googleapis.com/youtube/v3/search?key=" + key 
@@ -317,7 +319,8 @@ function videoReturn(part) {
                         videoTitle.setAttribute('id', 'ytVideoTitle');
                         videoTitle.innerHTML =item.snippet.title;
                         pageGrid.appendChild(videoTitle);
-                        
+
+                        // createS like button for each video.
                         let likeBtn = document.createElement('button');
                         likeBtn.setAttribute('id', 'likeBtn');
                         likeBtn.innerHTML = 'Like Video';
@@ -346,14 +349,16 @@ function videoReturn(part) {
                                 } catch (error) {
                                     console.error('Error:', error);
                                 }
-                            });
-                        });
-                        
+                                });
+                        });  
                 });
-            };
+        };
 };
 
+// Function to display liked videos.
 async function displayLikedVideos() {
+
+    // Get the liked videos from the server.
     try {
         const response = await fetch('/api/liked-videos');
         if (response.ok) {
@@ -363,9 +368,10 @@ async function displayLikedVideos() {
             while (body.firstChild) {
                 body.removeChild(body.firstChild);
             }
+
             navBar();
 
-            // Create a container for the liked videos
+            // Creates a container for the liked videos.
             const likedVideosContainer = document.createElement('div');
             likedVideosContainer.setAttribute('id', 'likedVideosContainer');
             body.appendChild(likedVideosContainer);
@@ -380,9 +386,10 @@ async function displayLikedVideos() {
             likedVideosHeader.innerHTML = 'Your Liked Videos';
             likePageGrid.appendChild(likedVideosHeader);
 
-            // Render the liked videos using the `likedVideos` array
+            // Render the liked videos using the `likedVideos` array from server.
             likedVideos.forEach(video => {
-                // Create iframe for the video
+
+                // Creates iframe for the video.
                 const videoFrame = document.createElement('iframe');
                 videoFrame.setAttribute('id', 'videoFrame');
                 videoFrame.setAttribute('src', 'https://www.youtube.com/embed/' + video.videoId);
@@ -390,7 +397,6 @@ async function displayLikedVideos() {
                 videoFrame.setAttribute('allow', 'fullscreen');
                 likePageGrid.appendChild(videoFrame);
 
-                // Create video title
                 const videoTitle = document.createElement('h2');
                 videoTitle.setAttribute('id', 'likedVideoTitle');
                 videoTitle.innerHTML = video.videoTitle;
@@ -402,11 +408,11 @@ async function displayLikedVideos() {
     } catch (error) {
         console.error('Error:', error);
     }
-}
+};
 
-
+// Function for the settings page.
 function settingsPage() {
-    // remove all the elements from the body, except those that are in the navbar.
+
     while (body.firstChild) {
         body.removeChild(body.firstChild);
     }
@@ -421,89 +427,81 @@ function settingsPage() {
         settingTitle.innerHTML = 'Preferences';
         settingContainer.appendChild(settingTitle);
 
-    // create a language select element.
+    // Creates a language selector
     const languageSelect = document.createElement('select');
     languageSelect.setAttribute('id', 'languageSelect');
         languageSelect.setAttribute('class', 'settingSelectors');
         const languageOption1 = document.createElement('option');
         const languageOption2 = document.createElement('option');
         const languageOption3 = document.createElement('option');
-        const languageOption4 = document.createElement('option');
-        const languageOption5 = document.createElement('option');
 
-    // add id's and classes to the language select element.
+
+    // Adds id's and classes to the language select element.
     languageSelect.setAttribute('id', 'languageSelect');
         languageOption1.setAttribute('class', 'languageOption');
+        languageOption1.setAttribute('id', 'english');
+        languageOption1.value = 'en';
         languageOption2.setAttribute('class', 'languageOption');
+        languageOption2.setAttribute('id', 'spanish');
+        languageOption2.value = 'es';
         languageOption3.setAttribute('class', 'languageOption');
-        languageOption4.setAttribute('class', 'languageOption');
-        languageOption5.setAttribute('class', 'languageOption');
+        languageOption3.setAttribute('id', 'french');
+        languageOption3.value = 'fr';
 
-    // append the language select element to the body.
     settingContainer.appendChild(languageSelect);
         languageSelect.appendChild(languageOption1);
         languageSelect.appendChild(languageOption2);
         languageSelect.appendChild(languageOption3);
-        languageSelect.appendChild(languageOption4);
-        languageSelect.appendChild(languageOption5);
 
-    // add content to the language options.
+    // Adds content to the language options.
     languageOption1.innerHTML = 'English';
     languageOption2.innerHTML = 'Spanish';
     languageOption3.innerHTML = 'French';
-    languageOption4.innerHTML = 'German';
-    languageOption5.innerHTML = 'Italian';
+    
 
-    // create a theme select element.
+    // Creates a theme select element.
     const themeSelect = document.createElement('select');
     const themeOption1 = document.createElement('option');
     const themeOption2 = document.createElement('option');
 
-    // add id's and classes to the theme select element.
+    // Adds id's and classes to the theme select element.
     themeSelect.setAttribute('id', 'themeSelect');
-        themeSelect.setAttribute('class', 'settingSelectors');
+    themeSelect.setAttribute('class', 'settingSelectors');
     themeOption1.setAttribute('class', 'themeOption');
+    themeOption1.setAttribute('id', 'lightMode');
     themeOption2.setAttribute('class', 'themeOption');
+    themeOption2.setAttribute('id', 'darkMode');
 
-    // append the theme select element to the body.
     body.appendChild(themeSelect);
     settingContainer.appendChild(themeSelect);
     themeSelect.appendChild(themeOption1);
     themeSelect.appendChild(themeOption2);
 
-    // add content to the theme options.
     themeOption1.innerHTML = 'Light';
     themeOption2.innerHTML = 'Dark';
 
-    // create a support & feedback button.
-    const supportFeedback = document.createElement('div');
-    supportFeedback.setAttribute('id', 'supportFeedback');
-        supportFeedback.setAttribute('class', 'settingSelectors');
-    supportFeedback.innerHTML = 'Support & Feedback';
-    settingContainer.appendChild(supportFeedback);
 
-
-    console.log('settings page');
-
-
+    // Creates a container for the login/logout buttons.
     const settingsLogContainer = document.createElement('div');
     settingsLogContainer.setAttribute('id', 'settingsLogContainer');
     settingContainer.appendChild(settingsLogContainer);
 
-    // create a login button.
+    // Creates login/out buttons.
     const loginBtn = document.createElement('button');
     loginBtn.setAttribute('class', 'setLogBtns');
+    loginBtn.setAttribute('id', 'loginBtn');
     loginBtn.innerHTML = 'Login';
 
-    // create a logout button.
     const logoutBtn = document.createElement('button');
     logoutBtn.setAttribute('class', 'setLogBtns');
+    logoutBtn.setAttribute('id', 'logoutBtn');
     logoutBtn.innerHTML = 'Logout';
 
 
     settingsLogContainer.appendChild(loginBtn);
     settingsLogContainer.appendChild(logoutBtn);
 
+    // Event listeners for the login/out buttons.
     loginBtn.addEventListener('click', () => {
         window.location.href = 'http://localhost:8080/login';
     });
@@ -515,7 +513,7 @@ function settingsPage() {
     navBar();
 };
 
-// create main content, navbar ect.
+// Creates the navbar.
 function navBar() {
 
     // create the navbar.
@@ -548,8 +546,9 @@ function navBar() {
     navItem3.innerHTML = 'Home';
     navItem4.innerHTML = 'Profile';
 
+    // Event listeners for the nav items.
     navItem1.addEventListener('click', () => {
-        settingsPage();
+        settingsPage()
     });
 
     navItem2.addEventListener('click', () => {
@@ -563,16 +562,15 @@ function navBar() {
     navItem4.addEventListener('click', () => {
         checkUserAuthenticationProfile();
     });
-
 };
 
+// Creates authentication block for the likes page.
 async function checkUserAuthenticationLikes() {
     try {
       const response = await fetch('/api/user-authenticated');
       if (response.status === 200) {
         const data = await response.json();
         // The user is authenticated, and you can access the user object in data.user
-        console.log('User authenticated:', data.user);
         displayLikedVideos();
       } else {
         // The user is not authenticated
@@ -595,27 +593,27 @@ async function checkUserAuthenticationLikes() {
     } catch (error) {
       console.error('Error checking authentication:', error);
     }
-  }
+};
 
+// Creates authentication block for the profile page.
 async function checkUserAuthenticationProfile() {
     try {
       const response = await fetch('/api/user-authenticated');
       if (response.status === 200) {
         const data = await response.json();
-        // The user is authenticated, and you can access the user object in data.user
-        console.log('User authenticated:', data.user);
+        // The user is authenticated, and you can access the user object in data.user.
         userProfile();
       } else {
-        // The user is not authenticated
+        // The user is not authenticated.
         console.log('User not authenticated');
-        // Redirect to the login page
+        // Redirect to the login page.
         window.location.href = `/login?returnTo=${encodeURIComponent(window.location.href)}&redirectToProfile=true`;
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const redirectToProfile = urlParams.get('redirectToProfile');
           
             if (redirectToProfile === 'true') {
-              // Remove the redirectToProfile parameter from the URL
+              // Remove the redirectToProfile parameter from the URL.
               urlParams.delete('redirectToProfile');
               window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
           
@@ -626,9 +624,9 @@ async function checkUserAuthenticationProfile() {
     } catch (error) {
       console.error('Error checking authentication:', error);
     }
-  }
+};
 
-// create the profile page content.
+// Creates the profile page.
 function userProfile() {
 
     while (body.firstChild) {
@@ -637,16 +635,14 @@ function userProfile() {
 
     navBar();
 
-    
-
-    // async function to fetch the profile data from the server.
+    // Async function to fetch the profile data from the server.
     async function fetchProfile() {
         const response = await fetch('http://localhost:8080/profile');
         const data = await response.json();
         return data;
     };
 
-    // create the elements for the profile page.
+    // Creates the elements for the profile page.
     const profileContainer = document.createElement('div');
     const profileName = document.createElement('p');
     const profileEmail = document.createElement('p');
@@ -655,17 +651,18 @@ function userProfile() {
     profileName.setAttribute('class', 'profileInfo');
     profileEmail.setAttribute('class', 'profileInfo');
 
-    // append the elements to the body.
+    // Appends the elements to the body.
     body.appendChild(profileContainer);
     profileContainer.appendChild(profileName);
     profileContainer.appendChild(profileEmail);
 
-    // call the fetch function to get the profile data for element content.
+    // Calls the fetch function to get the profile data for element content.
     fetchProfile().then(data => {
         profileName.innerHTML = `Username: ${data.name}`;
         profileEmail.innerHTML = `Email: ${data.email}`;
     });
 
+    /*
     // create div for profile video count
     const likedVideoCount = document.createElement('div');
     likedVideoCount.setAttribute('id', 'likedVideoCount');
@@ -688,14 +685,16 @@ function userProfile() {
         }
     }
 
-
     likedVideoCount.addEventListener('click', () => {
         getLikedVideosCount();
     });
+    */
 };
 
+// Initialises the page.
 function init() {
-    homePage()
+    homePage(); 
 };
 
+// Event listener for the window to initiate the page
 window.addEventListener('load', init);
